@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Emmanual Manoj, final-year Computer Science student at Ulster University and Android developer seeking a graduate software engineering role.">
+<title>Emmanual's Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single narrow column, left-aligned; projects as a stacked "build log" with status chips and a stack line per app */
+:root{
+  --bg:#F2F5F3; --surface:#FFFFFF; --ink:#14201B; --muted:#56655E; --line:#D5DED9;
+  --accent:#1F7A52; --accent-soft:#DDEFE5; --warn:#9A6400; --warn-soft:#F6EBD6;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1613; --surface:#16201C; --ink:#E6EEEA; --muted:#9AABA3; --line:#26332D;
+  --accent:#5CC994; --accent-soft:#183427; --warn:#E3B45A; --warn-soft:#33291A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1613; --surface:#16201C; --ink:#E6EEEA; --muted:#9AABA3; --line:#26332D;
+  --accent:#5CC994; --accent-soft:#183427; --warn:#E3B45A; --warn-soft:#33291A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+.wrap{max-width:780px;margin:0 auto;padding-block:56px 72px;display:flex;flex-direction:column;gap:64px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+p{margin:0;max-width:65ch}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* Hero */
+.hero{display:flex;flex-direction:column;gap:20px}
+.hero h1{font-size:clamp(44px,9vw,84px);font-weight:800;letter-spacing:-.02em}
+.hero h1 span{color:var(--accent)}
+.hero .lede{font-size:19px;color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn:hover{border-color:var(--accent)}
+
+section{display:flex;flex-direction:column;gap:22px}
+section>h2{font-size:30px;font-weight:700}
+.sechead{display:flex;flex-direction:column;gap:6px}
+
+/* Projects */
+.log{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.proj{display:grid;grid-template-columns:120px 1fr;gap:8px 24px;padding-block:24px;border-bottom:1px solid var(--line)}
+.proj .when{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:4px}
+.proj .body{display:flex;flex-direction:column;gap:10px;min-width:0}
+.proj h3{font-size:22px;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.chip{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.chip.wip{background:var(--warn-soft);color:var(--warn)}
+.chip.plan{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.stack{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.stack b{color:var(--ink);font-weight:500}
+ul.points{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+ul.points li::marker{color:var(--accent)}
+.proj.featured{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;margin-block:16px 0}
+
+/* Milestones */
+.miles{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:6px}
+.miles div{padding:10px 12px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.miles div:last-child{border-right:0}
+.miles .d{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.miles .t{font-size:14px;font-weight:500;line-height:1.3}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.skills h3{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:10px}
+.skills ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.skills li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.skills li small{font-family:var(--mono);font-size:11px;color:var(--warn);text-transform:uppercase;letter-spacing:.04em;align-self:center}
+
+/* Experience */
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding-block:14px;border-bottom:1px solid var(--line)}
+.row:first-child{border-top:1px solid var(--line)}
+.row strong{font-weight:600}
+.row .where{color:var(--muted)}
+.row .tag{font-family:var(--mono);font-size:12px;color:var(--muted);grid-column:2;grid-row:1}
+.award{display:flex;gap:16px;align-items:flex-start;background:var(--accent-soft);border-radius:12px;padding:20px}
+.award .mark{font-family:var(--display);font-size:40px;font-weight:800;color:var(--accent);line-height:1}
+.award strong{font-family:var(--display);font-size:19px}
+
+/* Contact */
+.contact{background:var(--ink);color:var(--bg);border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.contact h2{font-size:32px}
+.contact p{color:var(--bg);opacity:.85}
+.contact .btn{background:transparent;color:var(--bg);border-color:color-mix(in srgb,var(--bg) 35%,transparent)}
+.contact .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.todo{font-family:var(--mono);font-size:12px;opacity:.7}
+footer{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+@media (max-width:640px){
+  .proj{grid-template-columns:1fr}
+  .proj .when{padding-top:0}
+  .skills{grid-template-columns:1fr}
+  .miles{grid-template-columns:1fr 1fr}
+  .miles div:nth-child(2){border-right:0}
+  .miles div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .contact{padding:24px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero>*{animation:rise .6s ease-out both}
+  .hero>*:nth-child(2){animation-delay:.06s}.hero>*:nth-child(3){animation-delay:.12s}.hero>*:nth-child(4){animation-delay:.18s}
+  @keyframes rise{from{transform:translateY(8px)}to{transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="label">Graduate Software Engineer · Available 2027</span>
+    <h1>Emmanual Manoj<span>.</span></h1>
+    <p class="lede">Final-year Computer Science student at Ulster University building Android apps that solve everyday problems. Right now that means an AI-powered app to help households waste less food and share surplus with their community.</p>
+    <div class="meta"><span>Derry~Londonderry, NI</span><span>BSc (Hons) Computer Science</span><span>Dean's List</span></div>
+    <div class="links">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn" href="#projects">See projects</a>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="sechead">
+      <span class="label">Projects</span>
+      <h2>What I've built</h2>
+    </div>
+
+    <article class="proj featured">
+      <div class="when">2026–27<br>Final-year project</div>
+      <div class="body">
+        <h3>FreshTrack Connect <span class="chip wip">In progress</span></h3>
+        <p>An Android app for AI-assisted food management and community food rescue. It tracks what's in your kitchen, reads shop receipts, warns before food expires, and matches surplus food with people nearby who can use it.</p>
+        <ul class="points">
+          <li>Receipt scanning with OCR, plus an LLM API to clean up item names</li>
+          <li>Community surplus matching and a points-based reward system</li>
+          <li>Food waste analytics dashboard, including money lost to waste</li>
+          <li>AI chat assistant that answers questions about your inventory</li>
+          <li>Refactoring to MVVM and moving from SQLite to Firestore with offline support</li>
+        </ul>
+        <p class="stack"><b>Stack</b> · Java → Kotlin · MVVM · Firestore · TensorFlow Lite · Retrofit · Spoonacular API</p>
+        <div class="miles" aria-label="Project milestones">
+          <div><span class="d">27 Nov 2026</span><span class="t">Interim report</span></div>
+          <div><span class="d">Jan 2027</span><span class="t">Design demo</span></div>
+          <div><span class="d">30 Apr 2027</span><span class="t">Final submission</span></div>
+          <div><span class="d">May 2027</span><span class="t">Project showcase</span></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="log">
+      <article class="proj">
+        <div class="when">2025–26</div>
+        <div class="body">
+          <h3>FreshTrack <span class="chip">Shipped v1</span></h3>
+          <p>The first version of my food tracker. Users log groceries, get expiry reminders and find recipes for what they already have, pulled from the Spoonacular API.</p>
+          <p class="stack"><b>Stack</b> · Java · Android · SQLite · Retrofit · REST APIs</p>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="when">Oct 2026<br>COM594</div>
+        <div class="body">
+          <h3>Country Flag Game <span class="chip">Complete</span></h3>
+          <p>An Android quiz game that tests players on world flags. I designed the app and built the implementation for the Mobile Technology module.</p>
+          <p class="stack"><b>Stack</b> · Java · Android SDK · UI design</p>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="when">Next up</div>
+        <div class="body">
+          <h3>Study &amp; Habit Tracker <span class="chip plan">Planned</span></h3>
+          <p>An Android app to track study hours, habits and diet. The first in a series of portfolio apps, alternating between Android and Python, each one built to learn a new set of concepts.</p>
+          <p class="stack"><b>Stack</b> · Android · then Python projects</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="label">Recognition</span>
+      <h2>Highlights</h2>
+    </div>
+    <div class="award">
+      <span class="mark">1st</span>
+      <div><strong>First Prize, Kainos industry design sprint</strong>
+        <p>Won first place in a design sprint run by Kainos, one of Northern Ireland's leading software companies.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="label">Skills</span>
+      <h2>Toolkit</h2>
+    </div>
+    <div class="skills">
+      <div>
+        <h3>Languages</h3>
+        <ul><li>Java</li><li>Kotlin <small>Learning</small></li><li>SQL</li></ul>
+      </div>
+      <div>
+        <h3>Mobile &amp; data</h3>
+        <ul><li>Android development</li><li>MVVM architecture</li><li>SQLite &amp; Firestore</li><li>Retrofit &amp; REST APIs</li><li>TensorFlow Lite <small>Learning</small></li></ul>
+      </div>
+      <div>
+        <h3>Foundations</h3>
+        <ul><li>OOP &amp; system design</li><li>Algorithms &amp; data structures</li><li>Database modelling</li><li>Software testing</li><li>Computer vision</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="label">Background</span>
+      <h2>Education &amp; experience</h2>
+    </div>
+    <div class="rows">
+      <div class="row"><strong>BSc (Hons) Computer Science</strong><span class="tag">2027</span><span class="where">Ulster University, Derry~Londonderry · Dean's List</span></div>
+      <div class="row"><strong>Student Ambassador</strong><span class="tag">Ulster</span><span class="where">Represented the university at events and supported prospective students</span></div>
+      <div class="row"><strong>City Hotel Derry</strong><span class="tag">Hospitality</span><span class="where">Customer-facing work in a busy hotel team</span></div>
+      <div class="row"><strong>Tesco</strong><span class="tag">Retail</span><span class="where">Teamwork, reliability and working under pressure</span></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <span class="label" style="color:inherit;opacity:.7">Contact</span>
+    <h2>Let's talk</h2>
+    <p>I'm looking for a graduate software engineering role starting in 2027, where I can learn from experienced engineers and contribute to real products from day one.</p>
+    <div class="links">
+      <a class="btn primary" href="https://www.linkedin.com/in/emmanual-manoj-9641012b9">LinkedIn</a>
+      <a class="btn" href="https://github.com/Emmanual-Manoj1">GitHub</a>
+      <button class="btn" id="copy-email" type="button">Copy email</button>
+    </div>
+    <p class="todo">Email: <span id="email" style="user-select:all">manoj-e@ulster.ac.uk</span></p>
+  </section>
+
+  <footer>© 2026 Emmanual Manoj · Built in Derry~Londonderry</footer>
+</div>
+<script>
+document.getElementById('copy-email').addEventListener('click', function(){
+  var b=this, t=document.getElementById('email').textContent;
+  function done(){ b.textContent='Copied'; setTimeout(function(){ b.textContent='Copy email'; },1800); }
+  function fallback(){ var r=document.createRange(); r.selectNodeContents(document.getElementById('email')); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Selected, press Ctrl+C'; }
+  try { navigator.clipboard.writeText(t).then(done, fallback); } catch(e){ fallback(); }
+});
+</script>
+</body>
+</html>
